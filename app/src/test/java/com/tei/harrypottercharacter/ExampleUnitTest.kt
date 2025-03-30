@@ -1,4 +1,4 @@
-package com.tei.harrypottercharacters
+package com.tei.harrypottercharacter
 
 import org.junit.Test
 

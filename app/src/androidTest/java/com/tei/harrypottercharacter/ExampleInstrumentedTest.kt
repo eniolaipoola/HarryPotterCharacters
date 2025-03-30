@@ -1,4 +1,4 @@
-package com.tei.harrypottercharacters
+package com.tei.harrypottercharacter
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

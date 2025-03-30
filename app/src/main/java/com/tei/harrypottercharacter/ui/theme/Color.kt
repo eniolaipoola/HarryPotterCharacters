@@ -1,4 +1,4 @@
-package com.tei.harrypottercharacters.ui.theme
+package com.tei.harrypottercharacter.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

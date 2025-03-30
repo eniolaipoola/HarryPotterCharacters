@@ -1,4 +1,4 @@
-package com.tei.harrypottercharacters.ui.theme
+package com.tei.harrypottercharacter.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

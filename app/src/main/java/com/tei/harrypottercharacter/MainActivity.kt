@@ -1,4 +1,4 @@
-package com.tei.harrypottercharacters
+package com.tei.harrypottercharacter
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,14 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.tei.harrypottercharacters.ui.theme.HarryPotterCharactersTheme
+import com.tei.harrypottercharacter.ui.theme.HarryPotterCharacterTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            HarryPotterCharactersTheme {
+            HarryPotterCharacterTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",
@@ -41,7 +41,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    HarryPotterCharactersTheme {
+    HarryPotterCharacterTheme {
         Greeting("Android")
     }
 }

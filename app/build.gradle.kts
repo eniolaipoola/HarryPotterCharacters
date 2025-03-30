@@ -2,15 +2,17 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
-    namespace = "com.tei.harrypottercharacters"
+    namespace = "com.tei.harrypottercharacter"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.tei.harrypottercharacters"
-        minSdk = 21
+        applicationId = "com.tei.harrypottercharacter"
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -19,9 +21,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://hp-api.onrender.com/api/\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "BASE_URL", "\"https://hp-api.onrender.com/api/\"")
         }
     }
     compileOptions {
@@ -33,6 +39,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -46,11 +53,33 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.multidex)
+
+    //Room
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    testImplementation(libs.androidx.room.testing)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
+    //Hilt
+    ksp(libs.dagger.hilt.android.compiler)
+    implementation(libs.hilt.android)
+    testImplementation(libs.hilt.android.testing)
+
+    //coil
+    implementation(libs.coil.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
