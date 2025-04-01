@@ -3,14 +3,16 @@ package com.tei.harrypottercharacter.di
 import android.app.Application
 import androidx.room.Room
 import com.tei.harrypottercharacter.data.local.CharacterDatabase
+import com.tei.harrypottercharacter.data.local.CharactersDAO
 import com.tei.harrypottercharacter.data.network.APIService
-import com.tei.harrypottercharacter.ui.util.BASE_URL
-import com.tei.harrypottercharacter.ui.util.DATABASE_NAME
+import com.tei.harrypottercharacter.util.BASE_URL
+import com.tei.harrypottercharacter.util.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -18,6 +20,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(): OkHttpClient {
+        val logger = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+        return OkHttpClient.Builder()
+            .addInterceptor(logger).build()
+    }
 
     @Provides
     @Singleton
@@ -33,7 +45,8 @@ object AppModule {
     @Singleton
     fun provideDatabase(app: Application): CharacterDatabase {
         return Room.databaseBuilder(app, CharacterDatabase::class.java,
-            DATABASE_NAME).build()
+            DATABASE_NAME
+        ).build()
     }
 
     @Provides
@@ -44,6 +57,12 @@ object AppModule {
     @Singleton
     fun provideAPIService(retrofit: Retrofit) : APIService {
         return retrofit.create(APIService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharacterDAO(appDatabase: CharacterDatabase) : CharactersDAO {
+        return appDatabase.charactersDao()
     }
 
 }

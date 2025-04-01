@@ -1,10 +1,9 @@
-package com.tei.harrypottercharacter.ui
+package com.tei.harrypottercharacter.ui.character
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,98 +32,102 @@ import coil.compose.rememberAsyncImagePainter
 import com.tei.harrypottercharacter.R
 import com.tei.harrypottercharacter.data.model.CharacterModel
 import com.tei.harrypottercharacter.data.model.Wand
-import com.tei.harrypottercharacter.ui.component.CharacterHouseColor
+import com.tei.harrypottercharacter.ui.component.CharacterHouseIcon
 
 
 @Composable
-fun CharacterItem(
+fun CharacterItemCompose(
     character: CharacterModel,
     modifier: Modifier
 ) {
     Card(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_shape_large)),
         colors = CardDefaults.cardColors(
-            contentColor = colorResource(R.color.white)
+            contentColor = colorResource(R.color.white),
+            containerColor = colorResource(R.color.white)
         ),
+        modifier = modifier
+            .height(dimensionResource(R.dimen.card_item_height))
+            .fillMaxWidth()
+        ,
         elevation = CardDefaults.elevatedCardElevation(dimensionResource(R.dimen.elevation_dimen)),
     ) {
         Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Min),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.Center
         ) {
             // Character image
             Image(
                 painter = rememberAsyncImagePainter(
                     model = character.image,
                     placeholder = painterResource(R.drawable.image_placeholder),
-                    error = painterResource(R.drawable.icon_error)
+                    error = painterResource(R.drawable.image_placeholder)
                 ),
                 contentDescription = null,
                 modifier = modifier
                     .width(80.dp)
-                    .height(100.dp)
+                    .height(dimensionResource(R.dimen.card_item_height))
                     .padding(4.dp)
                     .align(Alignment.CenterVertically),
                 contentScale = ContentScale.Crop
             )
 
-            //Character information
-            Column(modifier = modifier
-                .weight(1f)
-                .padding(start = 8.dp).align(Alignment.CenterVertically),
-                verticalArrangement = Arrangement.Center
+            //Character name, actor's name and specie
+            Column(
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.padding(start = dimensionResource(R.dimen.padding_medium))
             ) {
-                // Character name, actors name and specie
-                Text(
-                    text = character.name ?: "Harry Potter",
-                    maxLines = 1,
-                    textAlign = TextAlign.Start,
-                    style = TextStyle(
-                        fontSize = dimensionResource(R.dimen.text_size_large).value.sp
-                    ),
-                    overflow = TextOverflow.Ellipsis,
-                    color = colorResource(id = R.color.primary_color)
+
+                CharacterInfoRow(stringResource(R.string.name_placeholder), character.name)
+                CharacterInfoRow(stringResource(R.string.actor_s_name_placeholder), character.actor)
+                CharacterInfoRow(stringResource(R.string.specie_placeholder), character.specie)
+
+                Spacer(modifier = modifier.height(dimensionResource(R.dimen.spacer_height)))
+            }
+
+            //House icon
+            Box(
+                modifier = modifier
+                    .width(40.dp)
+                    .height(40.dp),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                CharacterHouseIcon(
+                    houseColor = character.houseColor
                 )
-
-                Spacer(modifier = modifier.height(5.dp))
-
-                Text(
-                    text = character.actor ?: "Daniel Radcliffe",
-                    style = TextStyle(
-                        fontSize = dimensionResource(R.dimen.text_size_large).value.sp
-                    ),
-                    color = colorResource(R.color.primary_800)
-                )
-
-                Spacer(modifier = modifier.height(5.dp))
-
-                HorizontalDivider(
-                    thickness = 1.dp,
-                    color = colorResource(R.color.primary_color),
-                    modifier = modifier
-                        .padding(start = 4.dp, end = 4.dp)
-                        .height(2.dp)
-                )
-
-                Spacer(modifier = modifier.height(5.dp))
-
-                //color icon
-                Box(
-                    modifier = modifier
-                        .width(40.dp)
-                        .height(40.dp)
-                ) {
-                    CharacterHouseColor(
-                        onCallback = {
-
-                        },
-                        houseColor = character.houseColor
-                    )
-                }
             }
         }
+
+    }
+}
+
+@Composable
+fun CharacterInfoRow(name: String, value: String?
+) {
+    Row(
+        modifier = Modifier.padding(all = dimensionResource(R.dimen.padding_medium))
+    ) {
+        Text(
+            text = name,
+            maxLines = 1,
+            textAlign = TextAlign.Start,
+            style = TextStyle(
+                fontSize = dimensionResource(R.dimen.text_size_medium).value.sp
+            ),
+            overflow = TextOverflow.Ellipsis,
+            color = colorResource(id = R.color.primary_color)
+        )
+        Spacer(modifier = Modifier.width(dimensionResource(R.dimen.spacer_height)))
+        Text(
+            text = value ?: stringResource(R.string.name_default_string),
+            maxLines = 1,
+            textAlign = TextAlign.Start,
+            style = TextStyle(
+                fontSize = dimensionResource(R.dimen.text_size_medium).value.sp
+            ),
+            overflow = TextOverflow.Ellipsis,
+            color = colorResource(id = R.color.primary_color)
+        )
+
     }
 }
 
@@ -147,7 +150,7 @@ fun CharacterItemPreview() {
         wand = Wand(
             wood = "holly",
             core = "phoenix tail feather",
-            length = 11
+            length = 11.0
         ),
         patronus = "stag",
         hogwartsStudent = true,
@@ -158,6 +161,6 @@ fun CharacterItemPreview() {
         image = "https://ik.imagekit.io/hpapi/harry.jpg"
     )
 
-    CharacterItem(character, modifier = Modifier)
+    CharacterItemCompose(character, modifier = Modifier)
 
 }

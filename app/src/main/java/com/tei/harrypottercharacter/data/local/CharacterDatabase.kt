@@ -10,5 +10,5 @@ import com.tei.harrypottercharacter.data.local.entities.CharacterEntity
 @Database(entities = [CharacterEntity::class], version = 1, exportSchema = false)
 @TypeConverters(WandConverter::class, StringListConverter::class)
 abstract class CharacterDatabase : RoomDatabase() {
-
+    abstract fun charactersDao() : CharactersDAO
 }

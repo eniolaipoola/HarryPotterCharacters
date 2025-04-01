@@ -1,6 +1,6 @@
 [versions]
 agp = "8.7.3"
-kotlin = "2.0.0"
+kotlin = "2.0.21"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -16,6 +16,7 @@ loggingInterceptor = "4.11.0"
 hiltAndroid = "2.51.1"
 coil = "2.5.0"
 multidex = "2.0.1"
+hiltNavigation = "1.2.0"
 
 
 [libraries]
@@ -43,6 +44,7 @@ logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", ver
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroid" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigation" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 androidx-multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
 

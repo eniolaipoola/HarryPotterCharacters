@@ -70,6 +70,7 @@ dependencies {
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.hilt.android)
     testImplementation(libs.hilt.android.testing)
+    implementation(libs.hilt.navigation.compose)
 
     //coil
     implementation(libs.coil.compose)
