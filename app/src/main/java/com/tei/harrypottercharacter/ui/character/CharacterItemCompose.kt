@@ -26,7 +26,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.tei.harrypottercharacter.R
@@ -64,9 +63,9 @@ fun CharacterItemCompose(
                 ),
                 contentDescription = null,
                 modifier = modifier
-                    .width(80.dp)
+                    .width(dimensionResource(R.dimen.image_width))
                     .height(dimensionResource(R.dimen.card_item_height))
-                    .padding(4.dp)
+                    .padding(dimensionResource(R.dimen.padding_small))
                     .align(Alignment.CenterVertically),
                 contentScale = ContentScale.Crop
             )
@@ -77,18 +76,28 @@ fun CharacterItemCompose(
                 modifier = Modifier.padding(start = dimensionResource(R.dimen.padding_medium))
             ) {
 
-                CharacterInfoRow(stringResource(R.string.name_placeholder), character.name)
-                CharacterInfoRow(stringResource(R.string.actor_s_name_placeholder), character.actor)
-                CharacterInfoRow(stringResource(R.string.specie_placeholder), character.specie)
-
+                CharacterInfoRow(
+                    stringResource(R.string.name_placeholder),
+                    character.name,
+                    stringResource(R.string.name_default_string))
+                CharacterInfoRow(
+                    stringResource(R.string.actor_s_name_placeholder),
+                    character.actor,
+                    stringResource(R.string.actor_name_default_text),
+                )
+                CharacterInfoRow(
+                    stringResource(R.string.specie_placeholder),
+                    character.specie,
+                    stringResource(R.string.actor_name_default_text)
+                )
                 Spacer(modifier = modifier.height(dimensionResource(R.dimen.spacer_height)))
             }
 
             //House icon
             Box(
                 modifier = modifier
-                    .width(40.dp)
-                    .height(40.dp),
+                    .width(dimensionResource(R.dimen.search_bar_height))
+                    .height(dimensionResource(R.dimen.search_bar_height)),
                 contentAlignment = Alignment.CenterEnd
             ) {
                 CharacterHouseIcon(
@@ -101,7 +110,7 @@ fun CharacterItemCompose(
 }
 
 @Composable
-fun CharacterInfoRow(name: String, value: String?
+fun CharacterInfoRow(name: String, value: String?, emptyState: String
 ) {
     Row(
         modifier = Modifier.padding(all = dimensionResource(R.dimen.padding_medium))
@@ -118,7 +127,7 @@ fun CharacterInfoRow(name: String, value: String?
         )
         Spacer(modifier = Modifier.width(dimensionResource(R.dimen.spacer_height)))
         Text(
-            text = value ?: stringResource(R.string.name_default_string),
+            text = value ?: emptyState,
             maxLines = 1,
             textAlign = TextAlign.Start,
             style = TextStyle(

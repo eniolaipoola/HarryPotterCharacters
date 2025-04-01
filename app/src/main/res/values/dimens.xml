@@ -7,11 +7,11 @@
     <dimen name="border_width">1dp</dimen>
     <dimen name="elevation_dimen">1dp</dimen>
     <dimen name="text_size_large">16sp</dimen>
-    <dimen name="text_size_extra_large">24sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_medium">14sp</dimen>
     <dimen name="rounded_shape_large">16dp</dimen>
     <dimen name="fixed_box_height">200dp</dimen>
     <dimen name="card_item_height">120dp</dimen>
     <dimen name="spacer_height">5dp</dimen>
+    <dimen name="image_width">80dp</dimen>
 </resources>

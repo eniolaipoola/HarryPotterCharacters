@@ -5,7 +5,7 @@
     <string name="search_text">Search Icon Image</string>
     <string name="house_color_text">Character\'s house represented by defined colors</string>
     <string name="menu_icon">App Menu List</string>
-    <string name="success_message">Data Fetch Successfully\n</string>
+    <string name="success_message">Data FetchED Successfully\n</string>
     <string name="error_text">An error occurred</string>
     <string name="unknown_error_text">Unknown error</string>
     <string name="name_default_string">Harry Potter</string>
