@@ -1,6 +1,7 @@
 package com.tei.harrypottercharacter.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.tei.harrypottercharacter.data.local.CharacterDatabase
 import com.tei.harrypottercharacter.data.local.CharactersDAO
@@ -39,6 +40,12 @@ object AppModule {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideContext(application: Application): Context {
+        return application.applicationContext
     }
 
     @Provides

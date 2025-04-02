@@ -10,9 +10,6 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CharactersDAO {
 
-/*    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertCharacters(characterList: List<CharacterEntity>)*/
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateAllCharacters(charactersList: List<CharacterEntity>)
 
@@ -21,6 +18,10 @@ interface CharactersDAO {
 
     @Query("Delete from characters")
     suspend fun deleteAllCharacters()
+
+    @Query("SELECT * FROM characters WHERE name LIKE '%'" +
+            " || :search || '%' OR actor LIKE '%' || :search || '%'")
+    fun searchCharactersList(search: String) : Flow<List<CharacterEntity>>
 
 
 

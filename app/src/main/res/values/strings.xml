@@ -5,7 +5,7 @@
     <string name="search_text">Search Icon Image</string>
     <string name="house_color_text">Character\'s house represented by defined colors</string>
     <string name="menu_icon">App Menu List</string>
-    <string name="success_message">Data FetchED Successfully\n</string>
+    <string name="success_message">Data Fetched Successfully\n</string>
     <string name="error_text">An error occurred</string>
     <string name="unknown_error_text">Unknown error</string>
     <string name="name_default_string">Harry Potter</string>
@@ -13,4 +13,10 @@
     <string name="name_placeholder">"Name: "</string>
     <string name="actor_s_name_placeholder">"Actor's Name: "</string>
     <string name="specie_placeholder">"Specie: "</string>
+    <string name="http_404_error_message">Resource not found (404)</string>
+    <string name="server_error_500">Server error (500)</string>
+    <string name="unexpected_error">Unexpected error: %1$s</string>
+    <string name="network_error_message">Network error. Check your connection.</string>
+    <string name="error_generic">An error occurred</string>
+    <string name="no_data_found">No data match your search query</string>
 </resources>

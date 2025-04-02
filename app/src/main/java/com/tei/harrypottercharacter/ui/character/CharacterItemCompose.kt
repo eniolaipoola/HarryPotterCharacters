@@ -52,7 +52,8 @@ fun CharacterItemCompose(
         elevation = CardDefaults.elevatedCardElevation(dimensionResource(R.dimen.elevation_dimen)),
     ) {
         Row(
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             // Character image
             Image(
@@ -117,7 +118,7 @@ fun CharacterInfoRow(name: String, value: String?, emptyState: String
     ) {
         Text(
             text = name,
-            maxLines = 1,
+            maxLines = 2,
             textAlign = TextAlign.Start,
             style = TextStyle(
                 fontSize = dimensionResource(R.dimen.text_size_medium).value.sp

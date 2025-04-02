@@ -1,6 +1,5 @@
 package com.tei.harrypottercharacter.ui.character
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -24,6 +24,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tei.harrypottercharacter.R
 import com.tei.harrypottercharacter.data.network.NetworkUIState
@@ -61,7 +65,7 @@ fun CharactersHomeScreen(
                 searchText = searchText,
                 onSearchTextChanged = { searchText = it },
                 onSearch = {
-                    //perform search action
+                    viewModel.performSearch(searchText)
                 }
             )
         }
@@ -72,22 +76,34 @@ fun CharactersHomeScreen(
             }
             is NetworkUIState.Success -> {
                 val list = state.data
-                Log.d("tag", "list size is " + list.size)
-                LazyColumn (
-                    contentPadding = PaddingValues(dimensionResource(R.dimen.padding_large)),
-                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium)),
-                    verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large)),
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    list.let { list ->
-                        items(list.size) { index ->
-                            CharacterItemCompose(character = list[index], modifier = Modifier)
+                if(list.isEmpty()) {
+                    Text(
+                        text = stringResource(R.string.no_data_found),
+                        maxLines = 2,
+                        textAlign = TextAlign.Center,
+                        style = TextStyle(
+                            fontSize = dimensionResource(R.dimen.text_size_medium).value.sp
+                        ),
+                        overflow = TextOverflow.Ellipsis,
+                        color = colorResource(id = R.color.primary_color)
+                    )
+                } else {
+                    LazyColumn (
+                        contentPadding = PaddingValues(dimensionResource(R.dimen.padding_large)),
+                        modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium)),
+                        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large)),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        list.let { list ->
+                            items(list.size) { index ->
+                                CharacterItemCompose(character = list[index], modifier = Modifier)
+                            }
                         }
                     }
-                }
 
-                Toast.makeText(context, stringResource(R.string.success_message), Toast.LENGTH_SHORT).show()
+                }
             }
+
             is NetworkUIState.Error -> {
                 val error = state.exception.message ?: stringResource(R.string.unknown_error_text)
                 Toast.makeText(context, error, Toast.LENGTH_LONG).show()

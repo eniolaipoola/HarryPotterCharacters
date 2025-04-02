@@ -20,9 +20,6 @@ class CharacterViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<NetworkUIState<List<CharacterModel>>>(NetworkUIState.Loading)
     val uiState: StateFlow<NetworkUIState<List<CharacterModel>>> = _uiState
 
-    private val _characterList = MutableStateFlow<List<CharacterModel>>(emptyList())
-    val characterList: StateFlow<List<CharacterModel>> get() = _characterList
-
     private var fetchJob: Job? = null
 
     private fun cancelJob() {
@@ -35,6 +32,18 @@ class CharacterViewModel @Inject constructor(
             try {
                 repository.fetchAllCharacters().collect { result ->
                     _uiState.value = result
+                }
+            } catch (e: Exception) {
+                _uiState.value = NetworkUIState.Error(e)
+            }
+        }
+    }
+
+    fun performSearch(searchQuery: String) {
+        viewModelScope.launch {
+            try {
+                repository.searchCharacter(searchQuery).collect { searchResult ->
+                    _uiState.value = searchResult
                 }
             } catch (e: Exception) {
                 _uiState.value = NetworkUIState.Error(e)

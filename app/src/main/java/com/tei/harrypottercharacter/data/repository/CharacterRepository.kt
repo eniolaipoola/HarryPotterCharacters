@@ -24,30 +24,41 @@ class CharacterRepository @Inject constructor(
         try {
             emit(NetworkUIState.Loading)
 
-            //fetch character data from database
-            val savedCharacters = charactersDao.getAllCharacters().firstOrNull()
-            if(!savedCharacters.isNullOrEmpty()) {
-                val characterData = savedCharacters.map { it.toDomainModel()}
-                emit(NetworkUIState.Success(characterData))
-            }
+            //fetch character list data from database
+            val savedCharacters = charactersDao.getAllCharacters()
+            savedCharacters.collect {characterList ->
+                if(characterList.isNotEmpty()) {
+                    val characterData = characterList.map { it.toDomainModel()}
+                    emit(NetworkUIState.Success(characterData))
+                } else {
+                    //Database is empty, fetch from remote data source
+                    try {
+                        val response = apiService.fetchCharactersList()
+                        charactersDao.updateAllCharacters(response)
 
-            //if database is empty, fetch from API call
-            try {
-                val response = apiService.fetchCharactersList()
-                charactersDao.updateAllCharacters(response)
-
-                //re-fetch data from database again, just in case
-                val updatedCharacterList = charactersDao.getAllCharacters().firstOrNull()
-                if(!updatedCharacterList.isNullOrEmpty()) {
-                    val characterList = updatedCharacterList.map { it.toDomainModel()}
-                    emit(NetworkUIState.Success(characterList))
+                        //re-fetch data from database again, just in case
+                        val updatedCharacterList = charactersDao.getAllCharacters().firstOrNull()
+                        if(!updatedCharacterList.isNullOrEmpty()) {
+                            emit(NetworkUIState.Success(updatedCharacterList.map { it.toDomainModel()}))
+                        }
+                    } catch(exception: Exception) {
+                        emit(NetworkUIState.Error(exception))
+                    }
                 }
-            } catch(exception: Exception) {
-                emit(NetworkUIState.Error(exception))
             }
-
         } catch (e: Exception) {
             emit(NetworkUIState.Error(e))
+        }
+
+    }.flowOn(dispatcherProvider.io)
+
+
+    fun searchCharacter(searchQuery: String) : Flow<NetworkUIState<List<CharacterModel>>> = flow {
+
+        val result = charactersDao.searchCharactersList(searchQuery)
+        result.collect { characterList ->
+            val characterData = characterList.map { it.toDomainModel()}
+            emit(NetworkUIState.Success(characterData))
         }
 
     }.flowOn(dispatcherProvider.io)

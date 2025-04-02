@@ -16,7 +16,7 @@ fun CharacterHouseIcon(
     Icon(
         imageVector = Icons.Filled.CheckCircle,
         contentDescription = stringResource(id = R.string.house_color_text),
-        tint = houseColor
+        tint = houseColor,
     )
 
 }
