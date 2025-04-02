@@ -27,7 +27,7 @@ fun AppNavGraph(
         composable(
             route = "${NavScreen.CharacterDetailsScreen.route}/{$CHARACTER_ID}"
         ) { backStackEntry ->
-            val characterId = backStackEntry.arguments?.getString("$CHARACTER_ID") ?: ""
+            val characterId = backStackEntry.arguments?.getString(CHARACTER_ID) ?: ""
             CharacterDetailsPage(
                 characterId = characterId,
                 backHandler = { navController.popBackStack() }

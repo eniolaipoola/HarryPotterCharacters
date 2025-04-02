@@ -3,7 +3,7 @@ package com.tei.harrypottercharacter.util
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-fun getCharacterStatus(alive: Boolean?): String? {
+fun getCharacterStatus(alive: Boolean?): String {
     return when (alive) {
         true -> {
             ALIVE

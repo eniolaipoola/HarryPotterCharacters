@@ -17,16 +17,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterViewModel @Inject constructor(
-    private val repository: CharacterRepository,
-    savedStateHandle: SavedStateHandle
+    private val repository: CharacterRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<NetworkUIState<List<CharacterModel>>>(NetworkUIState.Loading)
     val uiState: StateFlow<NetworkUIState<List<CharacterModel>>> = _uiState
 
     private var fetchJob: Job? = null
-
-    private val characterId: String = savedStateHandle["characterId"] ?: ""
 
     private val _character = MutableStateFlow<CharacterModel?>(null)
     val character: StateFlow<CharacterModel?> = _character.asStateFlow()

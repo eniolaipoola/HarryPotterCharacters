@@ -22,7 +22,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
@@ -44,7 +43,6 @@ fun CharactersHomeScreen(
     onClick : (CharacterModel) -> Unit,
     viewModel: CharacterViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     var searchText by remember { mutableStateOf("") }
     val uiState by viewModel.uiState.collectAsState()
 
