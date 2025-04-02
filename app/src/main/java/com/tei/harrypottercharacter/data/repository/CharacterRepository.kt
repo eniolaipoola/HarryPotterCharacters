@@ -37,7 +37,6 @@ class CharacterRepository @Inject constructor(
                         val response = apiService.fetchCharactersList()
                         charactersDao.updateAllCharacters(response)
 
-                        //re-fetch data from database again, just in case
                         val updatedCharacterList = charactersDao.getAllCharacters().firstOrNull()
                         if(!updatedCharacterList.isNullOrEmpty()) {
                             emit(NetworkUIState.Success(updatedCharacterList.map { it.toDomainModel()}))

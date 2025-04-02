@@ -47,7 +47,9 @@ fun CharacterDetailsPage(
     }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize().background(colorResource(R.color.background_color_transparent)),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(R.color.background_color_transparent)),
         contentColor = colorResource(R.color.background_color_transparent),
         topBar = {
             TopAppBar(
@@ -91,7 +93,8 @@ fun CharacterDetailsPage(
             CharacterInfoRow(
                 stringResource(R.string.name_placeholder),
                 character?.name,
-                stringResource(R.string.name_default_string))
+                stringResource(R.string.name_default_string)
+            )
 
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
 
@@ -99,14 +102,16 @@ fun CharacterDetailsPage(
             CharacterInfoRow(
                 stringResource(R.string.date_of_birth),
                 dateOfBirth ?: stringResource(R.string.unknown_text),
-                stringResource(R.string.name_default_string))
+                stringResource(R.string.name_default_string)
+            )
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
 
             val aliveStatus = getCharacterStatus(character?.alive)
             CharacterInfoRow(
                 stringResource(R.string.is_alive_placeholder),
                 aliveStatus ?: stringResource(R.string.unknown_text),
-                stringResource(R.string.name_default_string))
+                stringResource(R.string.name_default_string)
+            )
 
         }
     }

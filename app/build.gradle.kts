@@ -56,24 +56,18 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.multidex)
-
-    //Room
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     testImplementation(libs.androidx.room.testing)
-
-    //Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
-    //Hilt
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.hilt.android)
     testImplementation(libs.hilt.android.testing)
     implementation(libs.hilt.navigation.compose)
 
-    //coil
     implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
