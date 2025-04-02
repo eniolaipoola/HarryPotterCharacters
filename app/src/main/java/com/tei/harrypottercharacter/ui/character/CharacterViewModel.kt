@@ -1,6 +1,5 @@
 package com.tei.harrypottercharacter.ui.character
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tei.harrypottercharacter.data.model.CharacterModel
@@ -23,7 +22,7 @@ class CharacterViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<NetworkUIState<List<CharacterModel>>>(NetworkUIState.Loading)
     val uiState: StateFlow<NetworkUIState<List<CharacterModel>>> = _uiState
 
-    private var fetchJob: Job? = null
+    var fetchJob: Job? = null
 
     private val _character = MutableStateFlow<CharacterModel?>(null)
     val character: StateFlow<CharacterModel?> = _character.asStateFlow()
@@ -66,7 +65,7 @@ class CharacterViewModel @Inject constructor(
     }
 
 
-    override fun onCleared() {
+    public override fun onCleared() {
         super.onCleared()
         cancelJob()
     }
