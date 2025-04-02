@@ -17,7 +17,7 @@ The application lists the characters in the movie, Harry Potter
 - ksp
 - Coil - Image loading library
 - Unit Tests
-- Integration Tests
+- Instrumentation Tests
 
 
 ## Architecture
