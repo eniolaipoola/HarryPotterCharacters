@@ -1,6 +1,5 @@
 package com.tei.harrypottercharacter.ui.character
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -106,7 +106,10 @@ fun CharactersHomeScreen(
                     } else {
                         LazyColumn (
                             contentPadding = PaddingValues(dimensionResource(R.dimen.padding_large)),
-                            modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium)),
+                            modifier = Modifier
+                                .padding(dimensionResource(R.dimen.padding_medium))
+                                .testTag(stringResource(R.string.character_list_tag))
+                            ,
                             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large)),
                             horizontalAlignment = Alignment.Start
                         ) {
@@ -114,7 +117,11 @@ fun CharactersHomeScreen(
                                 items(list.size) { index ->
                                     CharacterItemCompose(
                                         character = list[index],
-                                        modifier = Modifier,
+                                        modifier = Modifier.testTag(
+                                            stringResource(
+                                                R.string.character_item_tag,
+                                                list[index].id
+                                            )),
                                         onClick = {
                                             onClick(list[index])
                                         }
@@ -128,7 +135,16 @@ fun CharactersHomeScreen(
 
                 is NetworkUIState.Error -> {
                     val error = state.exception.message ?: stringResource(R.string.unknown_error_text)
-                    Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+                    Text(
+                        text = error,
+                        maxLines = 2,
+                        textAlign = TextAlign.Center,
+                        style = TextStyle(
+                            fontSize = dimensionResource(R.dimen.text_size_medium).value.sp
+                        ),
+                        overflow = TextOverflow.Ellipsis,
+                        color = colorResource(id = R.color.primary_color)
+                    )
                 }
             }
         }

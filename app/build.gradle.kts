@@ -18,17 +18,13 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.tei.harrypottercharacter.TestRunner"
     }
 
     buildTypes {
-        debug {
-            buildConfigField("String", "BASE_URL", "\"https://hp-api.onrender.com/api/\"")
-        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            buildConfigField("String", "BASE_URL", "\"https://hp-api.onrender.com/api/\"")
         }
     }
     compileOptions {
@@ -56,6 +52,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.multidex)
+    androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(project(":app"))
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     testImplementation(libs.androidx.room.testing)
@@ -68,19 +66,24 @@ dependencies {
     testImplementation(libs.hilt.android.testing)
     implementation(libs.hilt.navigation.compose)
 
+
     implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
-    testImplementation(libs.android.mockk)
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
     testImplementation(libs.androidx.core.testing)
     testImplementation(libs.kotlinx.coroutines.test)
 
+
+    androidTestImplementation(libs.androidx.runner)
+    androidTestImplementation(libs.androidx.rules)
+    androidTestImplementation(libs.ui.test.junit4)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

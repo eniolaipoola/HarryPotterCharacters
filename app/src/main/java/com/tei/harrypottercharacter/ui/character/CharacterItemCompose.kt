@@ -29,12 +29,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.tei.harrypottercharacter.R
 import com.tei.harrypottercharacter.data.model.CharacterModel
-import com.tei.harrypottercharacter.data.model.Wand
 
 
 @Composable
@@ -151,38 +149,4 @@ fun CharacterInfoRow(name: String, value: String?, emptyState: String
         )
 
     }
-}
-
-@Preview
-@Composable
-fun CharacterItemPreview() {
-    val character = CharacterModel(
-        id = "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8",
-        name = "Harry Potter",
-        alternateNames = listOf(),
-        specie = "human",
-        gender = "male",
-        house = "Gryffindor",
-        dateOfBirth = "31-07-1980",
-        yearOfBirth = 1980,
-        wizard = true,
-        ancestry = "half-blood",
-        eyeColor = "green",
-        hairColor = "black",
-        wand = Wand(
-            wood = "holly",
-            core = "phoenix tail feather",
-            length = 11.0
-        ),
-        patronus = "stag",
-        hogwartsStudent = true,
-        hogwartsStaff = false,
-        actor = "Daniel Radcliffe",
-        alternateActors = listOf(),
-        alive = true,
-        image = "https://ik.imagekit.io/hpapi/harry.jpg"
-    )
-
-    //CharacterItemCompose(character, modifier = Modifier)
-
 }

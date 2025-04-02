@@ -19,7 +19,7 @@
     <string name="unknown_text">Unknown</string>
     <string name="network_error_message">Network error. Check your connection.</string>
     <string name="error_generic">An error occurred</string>
-    <string name="no_data_found">No data match your search query</string>
+    <string name="no_data_found">No data available</string>
     <string name="specie_default_text">Specie</string>
     <string name="character_image">A movie character image</string>
     <string name="back_button_text">Back</string>
@@ -27,4 +27,7 @@
     <string name="loading">Loading...</string>
     <string name="date_of_birth">Date of Birth:</string>
     <string name="is_alive_placeholder">Is Character Alive?: </string>
+    <string name="search_field_tag">search_text_field</string>
+    <string name="character_list_tag">characters_list</string>
+    <string name="character_item_tag">character_item%1$s</string>
 </resources>

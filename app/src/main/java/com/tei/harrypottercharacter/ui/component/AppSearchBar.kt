@@ -14,6 +14,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -42,7 +43,8 @@ fun SearchTopBar(
             ),
             maxLines = 1,
             modifier = Modifier
-                .fillMaxWidth(0.9f),
+                .fillMaxWidth(0.9f)
+                .testTag(stringResource(R.string.search_field_tag)),
             placeholder = {
                 Text(stringResource(R.string.search_placeholder_text))
             },
