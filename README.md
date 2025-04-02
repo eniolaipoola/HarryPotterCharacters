@@ -26,5 +26,6 @@ The application lists the characters in the movie, Harry Potter
 
 ### App Implementation
 <p align="center">
-<img src="screenshots/screenshot_2.png"  width="200"/>
+<img src="screenshots/detail_page.png"  width="200"/>
+<img src="screenshots/home_page.png"  width="200"/>
 </p>
