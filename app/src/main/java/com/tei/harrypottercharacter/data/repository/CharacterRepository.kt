@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -62,5 +63,11 @@ class CharacterRepository @Inject constructor(
         }
 
     }.flowOn(dispatcherProvider.io)
+
+    fun getCharacterById(characterId: String): Flow<CharacterModel> {
+        val data = charactersDao.getCharacterById(characterId)
+            .flowOn(dispatcherProvider.io)
+        return data.map { it.toDomainModel() }
+    }
 
 }

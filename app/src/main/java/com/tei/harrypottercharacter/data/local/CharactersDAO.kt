@@ -23,6 +23,7 @@ interface CharactersDAO {
             " || :search || '%' OR actor LIKE '%' || :search || '%'")
     fun searchCharactersList(search: String) : Flow<List<CharacterEntity>>
 
-
+    @Query("SELECT * FROM characters WHERE id = :characterId")
+    fun getCharacterById(characterId: String): Flow<CharacterEntity>
 
 }

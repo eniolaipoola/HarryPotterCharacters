@@ -55,8 +55,8 @@ fun SearchTopBar(
                 )
             },
             colors = TextFieldDefaults.colors(
-                focusedContainerColor = colorResource(R.color.white),
-                unfocusedContainerColor = colorResource(R.color.white),
+                focusedContainerColor = colorResource(R.color.background_color_transparent),
+                unfocusedContainerColor = colorResource(R.color.background_color_transparent),
                 cursorColor = colorResource(R.color.primary_color),
                 focusedTrailingIconColor = colorResource(R.color.primary_color)
             ),

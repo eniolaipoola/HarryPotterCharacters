@@ -53,7 +53,6 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 androidx-multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
 android-mockk = { module = "io.mockk:mockk-android", version.ref = "mockkVersion" }
-agent-mockk = { module = "io.mockk:mockk-agent", version.ref = "mockkVersion" }
 
 
 [plugins]

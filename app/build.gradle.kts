@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -81,7 +82,6 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
 
 
-    androidTestImplementation(libs.agent.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
